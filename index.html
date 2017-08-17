@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>MP3 player</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <section id="app">
+
+    <label for="files"
+      class="select-list__btn"
+      :class="{'select-list__btn-disabled': isPlaying}">
+      Выберите MP3 файлы для списка проигрывания
+    </label>
+    <input type="file"
+      id="files"
+      :disabled="isPlaying"
+      multiple="true"
+      accept="audio/mp3"
+      @change="onChange($event)"
+      class="select-list__input">
+
+    <h5 class="mp3-list__title">
+      Список выбранных MP3 файлов:
+    </h5>
+    <div class="mp3-list__content">
+      <div v-for="(file, $index) of files"
+        class="mp3-list__item"
+        :class="{'mp3-list__item-select': checkSelectFile($index)}">
+
+        <div v-if="(!checkSelectFile($index) && isPlaying) || (!checkSelectFile($index) && !isPlaying) || (checkSelectFile($index) && !isPlaying)"
+          class="mp3-list__item--select"
+          @click="playAudio($index)">
+          <i class="fa fa-play" aria-hidden="true"></i>
+        </div>
+        <div v-else-if="checkSelectFile($index) && isPlaying"
+          class="mp3-list__item--select"
+          @click="pauseAudio($index)">
+          <i class="fa fa-pause" aria-hidden="true"></i>
+        </div>
+
+        <div class="mp3-list__item--name">
+          {{file.name}} {{(duration !== 0 && checkSelectFile($index)) ? '(' + showDuration()  + ')': ''}}
+          <div v-if="checkSelectFile($index)"
+            id="playingtime"
+            class="mp3-list__item--playingtime">
+          </div>
+        </div>
+
+        <div class="mp3-list__item--loading">
+          <i v-if="checkSelectFile($index) && isLoading"
+            class="fa fa-spinner" 
+            aria-hidden="true"></i>
+        </div>
+
+      </div>
+    </div>
+
+    <audio id="player"
+      autoplay="true"
+      :src="playableFile">
+    </audio>
+
+  </section>
+
+  <script src="./id3.min.js"></script>
+  <script src="./vue.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>

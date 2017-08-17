@@ -1,0 +1,134 @@
+body {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+section, div, p {
+  box-sizing: border-box;
+}
+
+.select-list__btn {
+  display: block;
+  position: relative;
+  width: 400px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 16px;
+  color: #323232;
+  margin: 8px 0;
+  background-color: #cdcdcd;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.select-list__btn:hover {
+  background-color: #bcbcbc;
+}
+
+.select-list__btn-disabled {
+  cursor: not-allowed;
+}
+
+.select-list__input {
+  display: block;
+  position: absolute;
+  opacity: 0;
+  width: 390px;
+  height: 30px;
+  top: 25px;
+  left: 22px;
+  cursor: pointer;
+}
+
+.select-list__inpu[disabled] {
+  cursor: not-allowed;
+}
+
+.mp3-list__title {
+  margin-bottom: 4px;
+}
+
+.mp3-list__content {
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  height: 320px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+}
+
+.mp3-list__item {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.06);
+}
+
+.mp3-list__item-select {
+  background-color: lightskyblue;
+}
+
+#player {
+  opacity: 0;
+}
+
+.mp3-list__item--select {
+  position: relative;
+  width: 32px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mp3-list__item--select .fa {
+  color: #cdcdcd;
+}
+
+.mp3-list__item--select:hover .fa {
+  color: #323232;
+}
+
+.mp3-list__item--name {
+  position: relative;
+  width: calc(100% - 64px);
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mp3-list__item--loading {
+  position: relative;
+  width: 32px;
+  text-align: center;
+}
+
+@keyframes loading {
+  to { transform: rotate(360deg); }
+}
+
+.mp3-list__item--loading .fa {
+  animation: loading 0.5s infinite linear;
+}
+
+.mp3-list__item--playingtime {
+  position: absolute;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+}
